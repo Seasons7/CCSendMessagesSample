@@ -55,11 +55,13 @@
         #if __USE_CCSENDMESSAGES == 1
 
             // アニメーション開始メソッドを呼び出す
-            CCSendMessages *message1 = [CCSendMessages actionWithTarget:self];
+            CCSendMessages *message1 = nil;
+            message1 = [CCSendMessages actionWithTarget:self];
             [[message1 addMessage] animationStart];
 
             // 2倍拡大＆不透明度を半分に
-            CCSendMessages *message2 = [CCSendMessages actionWithTarget:iconImage];
+            CCSendMessages *message2 = nil;
+            message2 = [CCSendMessages actionWithTarget:iconImage];
             [(CCSprite *)[message2 addMessage] setOpacity:128];
             [(CCSprite *)[message2 addMessage] setScale:2.0];
 
@@ -77,13 +79,15 @@
         #else
 
             // アニメーション開始メソッドを呼び出す
-            CCCallFunc *callFunc1 = [CCCallFunc actionWithTarget:self
-                                                        selector:@selector(animationStart)];
+            CCCallFunc *callFunc1 = nil;
+            callFunc1 = [CCCallFunc actionWithTarget:self
+                                            selector:@selector(animationStart)];
         
             // 2倍拡大＆不透明度を半分に
-            CCCallFuncND *callFunc2 = [CCCallFuncND actionWithTarget:self
-                                                           selector:@selector(changeSpriteAttribute:)
-                                                               data:iconImage];
+            CCCallFuncND *callFunc2 = nil;
+            [CCCallFuncND actionWithTarget:self
+                                  selector:@selector(changeSpriteAttribute:)
+                                      data:iconImage];
 
             // シーケンスアニメーション生成
             // 1) animationStartメソッドを呼び出す
