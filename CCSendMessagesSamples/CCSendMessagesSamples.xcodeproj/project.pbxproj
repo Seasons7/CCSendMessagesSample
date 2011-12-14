@@ -122,6 +122,7 @@
 		AD90E5351498C4630014302F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AD90E5341498C4630014302F /* AppDelegate.m */; };
 		AD90E5381498C4630014302F /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD90E5371498C4630014302F /* RootViewController.m */; };
 		AD90E53B1498C4630014302F /* HelloWorldLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = AD90E53A1498C4630014302F /* HelloWorldLayer.m */; };
+		AD90E5441498C5320014302F /* CCSendMessages.m in Sources */ = {isa = PBXBuildFile; fileRef = AD90E5431498C5320014302F /* CCSendMessages.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -360,6 +361,8 @@
 		AD90E5391498C4630014302F /* HelloWorldLayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HelloWorldLayer.h; sourceTree = "<group>"; };
 		AD90E53A1498C4630014302F /* HelloWorldLayer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HelloWorldLayer.m; sourceTree = "<group>"; };
 		AD90E53C1498C4630014302F /* GameConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameConfig.h; sourceTree = "<group>"; };
+		AD90E5421498C5320014302F /* CCSendMessages.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSendMessages.h; sourceTree = "<group>"; };
+		AD90E5431498C5320014302F /* CCSendMessages.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSendMessages.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -416,6 +419,8 @@
 		AD90E3E11498C4610014302F /* CCSendMessagesSamples */ = {
 			isa = PBXGroup;
 			children = (
+				AD90E5421498C5320014302F /* CCSendMessages.h */,
+				AD90E5431498C5320014302F /* CCSendMessages.m */,
 				AD90E5331498C4630014302F /* AppDelegate.h */,
 				AD90E5341498C4630014302F /* AppDelegate.m */,
 				AD90E5361498C4630014302F /* RootViewController.h */,
@@ -925,6 +930,7 @@
 				AD90E5351498C4630014302F /* AppDelegate.m in Sources */,
 				AD90E5381498C4630014302F /* RootViewController.m in Sources */,
 				AD90E53B1498C4630014302F /* HelloWorldLayer.m in Sources */,
+				AD90E5441498C5320014302F /* CCSendMessages.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

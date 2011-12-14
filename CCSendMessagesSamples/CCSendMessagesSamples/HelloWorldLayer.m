@@ -3,50 +3,100 @@
 //  CCSendMessagesSamples
 //
 //  Created by 畑 圭輔 on 11/12/14.
-//  Copyright __MyCompanyName__ 2011年. All rights reserved.
+//  Copyright keisuke.hata 2011年. All rights reserved.
 //
 
 
 // Import the interfaces
+#import <AVFoundation/AVFoundation.h>
 #import "HelloWorldLayer.h"
+#import "CCSendMessages.h"
+
+#define __USE_CCSENDMESSAGES 0
 
 // HelloWorldLayer implementation
 @implementation HelloWorldLayer
 
 +(CCScene *) scene
 {
-	// 'scene' is an autorelease object.
 	CCScene *scene = [CCScene node];
-	
-	// 'layer' is an autorelease object.
 	HelloWorldLayer *layer = [HelloWorldLayer node];
-	
-	// add layer as a child to scene
 	[scene addChild: layer];
-	
-	// return the scene
 	return scene;
 }
+
+- (void) animationStart {
+
+    CCLOG(@"アニメーション開始");
+}
+
+#if __USE_CCSENDMESSAGES == 0
+
+- (void) changeSpriteAttribute:(void *)data {
+    
+    CCSprite *sprite = (CCSprite *)data;
+    NSAssert( [sprite isKindOfClass:[CCSprite class]] == TRUE,@"This isn't CCSprite class" );
+   
+    sprite.scale   = 2.0;
+    sprite.opacity = 128;
+}
+
+#endif
 
 // on "init" you need to initialize your instance
 -(id) init
 {
-	// always call "super" init
-	// Apple recommends to re-assign "self" with the "super" return value
 	if( (self=[super init])) {
-		
-		// create and initialize a Label
-		CCLabelTTF *label = [CCLabelTTF labelWithString:@"Hello World" fontName:@"Marker Felt" fontSize:64];
 
-		// ask director the the window size
-		CGSize size = [[CCDirector sharedDirector] winSize];
-	
-		// position the label on the center of the screen
-		label.position =  ccp( size.width /2 , size.height/2 );
-		
-		// add the label as a child to this Layer
-		[self addChild: label];
-	}
+        CCSprite *iconImage = [CCSprite spriteWithFile:@"Icon.png"];
+        iconImage.position = ccp( 100, 100 );
+        [self addChild:iconImage];
+
+        #if __USE_CCSENDMESSAGES == 1
+
+            // アニメーション開始メソッドを呼び出す
+            CCSendMessages *message1 = [CCSendMessages actionWithTarget:self];
+            [[message1 addMessage] animationStart];
+
+            // 2倍拡大＆不透明度を半分に
+            CCSendMessages *message2 = [CCSendMessages actionWithTarget:iconImage];
+            [(CCSprite *)[message2 addMessage] setOpacity:128];
+            [(CCSprite *)[message2 addMessage] setScale:2.0];
+
+            // シーケンスアニメーション生成
+            // 1) animationStartメソッドを呼び出す
+            // 2) 1秒待つ
+            // 3) 2倍拡大＆不透明度を半分に
+            CCSequence *seq = nil;[CCSequence actions:
+                    message1,
+                    [CCDelayTime actionWithDuration:1.0],
+                    message2,
+                    nil];
+
+            [iconImage runAction:seq];
+        #else
+
+            // アニメーション開始メソッドを呼び出す
+            CCCallFunc *callFunc1 = [CCCallFunc actionWithTarget:self
+                                                        selector:@selector(animationStart)];
+        
+            // 2倍拡大＆不透明度を半分に
+            CCCallFuncND *callFunc2 = [CCCallFuncND actionWithTarget:self
+                                                           selector:@selector(changeSpriteAttribute:)
+                                                               data:iconImage];
+
+            // シーケンスアニメーション生成
+            // 1) animationStartメソッドを呼び出す
+            // 2) 1秒待つ
+            // 3) 2倍拡大＆不透明度を半分に
+            CCSequence *seq = [CCSequence actions:callFunc1,
+                            [CCDelayTime actionWithDuration:1.0],
+                            callFunc2,
+                            nil];
+
+            [iconImage runAction:seq];
+        #endif
+    }
 	return self;
 }
 
